@@ -15,14 +15,14 @@ api_token="Put your API token here"
 
 # IPv4更新开关 1=更新
 v4_update_switch="1"
-# IPv4代理开关 true or false
+# IPv4代理开关（CloudFlare CDN服务，国内貌似被墙） true or false
 v4_proxy_switch=false
 # IPv4查询地址
 v4_query_url="ipv4.whatismyip.akamai.com"
 
 # IPv6更新开关 1=更新
 v6_update_switch="1"
-# IPv6代理开关 true or false
+# IPv6代理开关（CloudFlare CDN服务，国内貌似被墙） true or false
 v6_proxy_switch=false
 # IPv6查询地址
 v6_query_url="ipv6.whatismyip.akamai.com"
@@ -54,7 +54,6 @@ update_record() {
               "ttl": 1,
               "proxied": '${proxy_switch}'
             }')
-        # 如果你不希望开启CloudFlare CDN服务，那么将"proxied"修改为 false
 
         echo "$response" | tr , '\n' | grep -q '^"success":true$' && echo "${type}记录已更新，新的值为: $current_value" || echo "${type}记录更新失败！"
     fi
