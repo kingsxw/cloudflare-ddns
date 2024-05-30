@@ -65,13 +65,13 @@ while true; do
 
     # 检查IPv4地址是否需要更新
     if [ "$v4_update_switch" = "1" ]; then
-        current_ip_v4="$(curl -s "$v4_query_url")"
+        current_ip_v4="$(curl -klsL "$v4_query_url")"
         update_record "A" "$v4_proxy_switch" "$current_ip_v4"
     fi
 
     # 检查IPv6地址是否需要更新
     if [ "$v6_update_switch" = "1" ]; then
-        current_ip_v6="$(curl -s "$v6_query_url")"
+        current_ip_v6="$(curl -klsL "$v6_query_url")"
         update_record "AAAA" "$v6_proxy_switch" "$current_ip_v6"
     fi
     sleep $update_interval
